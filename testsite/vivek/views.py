@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 # Create your views here.
 from .forms import NameForm
-from django.core.files.base import ContentFile
 class HomePageView(TemplateView):
     def get(self, request, **kwargs):
 	
@@ -15,27 +14,28 @@ class hostpage(TemplateView):
 
 class installpage(TemplateView):
     def get(self, request, **kwargs):
+        
         return render(request, 'install.html', context=None)
 
 
 def my_view1(request):
-        if request.method == 'POST':
-          
-          hostname = request.POST.get('hostname')
+          hostname= request.GET.get('hostname')
+          f = open( '/root/ansible/hostname', 'w+' )
+          f.write( hostname )
+          f.close()           
           import os
-          os.system('echo $hostname > /root/ansible/hostname')
           cmd = 'ansible-playbook /root/ansible/hostname.yml'
           os.system(cmd)
- 
-        return HttpResponse('Hostname changed')
+          return HttpResponse('Hostname changed')
 
 def take_view(request):
-        if request.method == 'POST':
-          package = request.POST.get('install')
+          package = request.GET.get('install')
+          f = open( '/root/ansible/indata', 'w+' )
+          f.write( package )
+          f.close() 
           import os
-          os.system('echo $package > /root/ansible/hostname')
           cmd = 'ansible-playbook /root/ansible/install.yml'
           os.system(cmd)
 
-        return HttpResponse('Package installed')
+          return HttpResponse('Package installed')
 
