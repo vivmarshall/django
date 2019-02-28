@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sirvikk</title>
+    </head>
+<form action="{% url 'take_view'%}" method="POST">
+    {% csrf_token %}
+    <label for="install">Enter package name to install it in client: </label>
+    <input id="t2" type="text" name="install">
+    <input type="submit" value="Install"><br><br>
+</form>
+</html>
+
