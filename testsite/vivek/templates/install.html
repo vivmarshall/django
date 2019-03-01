@@ -5,7 +5,9 @@
     </head>
 <form action="{% url 'take_view'%}" method="GET">
     <label for="install">Enter package name to install it in client: </label>
-    <input id="t2" type="text" name="install">
+    <input id="t2" type="text" name="install"><br><br>
+    <label for="hostname">Enter name of the client machine: </label>
+    <input id="t2" type="text" name="cname"><br><br>
     <input type="submit" value="Install"><br><br>
 </form>
 </html>

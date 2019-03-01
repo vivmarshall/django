@@ -20,21 +20,29 @@ class installpage(TemplateView):
 
 def my_view1(request):
           hostname= request.GET.get('hostname')
-          f = open( '/root/ansible/hostname', 'w+' )
+          client= request.GET.get('cname')
+          f = open( '/root/django/testsite/files/hostname', 'w+' )
           f.write( hostname )
           f.close()           
+          f = open( '/root/django/testsite/files/clientname', 'w+' )
+          f.write( client )
+          f.close()           
           import os
-          cmd = 'ansible-playbook /root/ansible/hostname.yml'
+          cmd = 'ansible-playbook /root/django/testsite/files/hostname.yml'
           os.system(cmd)
           return HttpResponse('Hostname changed')
 
 def take_view(request):
           package = request.GET.get('install')
-          f = open( '/root/ansible/indata', 'w+' )
+          client= request.GET.get('cname')
+          f = open( '/root/django/testsite/files/indata', 'w+' )
           f.write( package )
           f.close() 
+          f = open( '/root/django/testsite/files/clientname', 'w+' )
+          f.write( client )
+          f.close()           
           import os
-          cmd = 'ansible-playbook /root/ansible/install.yml'
+          cmd = 'ansible-playbook /root/django/testsite/files/install.yml'
           os.system(cmd)
 
           return HttpResponse('Package installed')

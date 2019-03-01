@@ -1,0 +1,6 @@
+---
+- hosts: root@{{ lookup('file','clientname') }}
+  vars:
+     contents: "{{ lookup('file', 'hostname') }}"
+  tasks:
+     - command: hostname {{ contents }}

@@ -1,0 +1,6 @@
+---
+- hosts: root@{{ lookup('file','clientname') }}
+  vars:
+     contents: "{{ lookup('file', 'indata') }}"
+  tasks:
+     - command: yum install {{ contents  }} -y
